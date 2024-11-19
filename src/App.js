@@ -17,6 +17,7 @@ function App(props) {
     key={task.id}
     toggleTaskCompleted={toggleTaskCompleted} 
     deleteTask={deleteTask}
+    editTask={editTask}
     />
   ));
   const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
@@ -43,6 +44,18 @@ function App(props) {
       return task;
     });
     setTasks(updatedTasks);
+  }
+
+  function editTask(id, newName) {
+    const editedTaskList = tasks.map((task) => {
+      // 如果和传入id相同则在最后更新name
+      if (id === task.id) {
+        return {...task, name: newName}
+      }
+      // 否则返回原task
+      return task;
+    });
+    setTasks(editedTaskList);
   }
 
   function deleteTask(id) {
